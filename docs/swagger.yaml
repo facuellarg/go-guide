@@ -1,0 +1,32 @@
+definitions:
+  main.User:
+    properties:
+      last_name:
+        type: string
+      name:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /user/save:
+    post:
+      consumes:
+      - application/json
+      description: save sended user
+      parameters:
+      - description: user that will be saved
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/main.User'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/main.User'
+      summary: save user
+swagger: "2.0"
