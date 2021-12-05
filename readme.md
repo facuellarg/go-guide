@@ -8,7 +8,7 @@ This guide attempt to create a basic path of learning for go programming languag
 In every explanation ,we will do some example or a link will be left that redirects to some another page to see better that topic.
 
 In some cases the explanation in the official go tour is enough and for that reason we only will be left the link of it.
-<!-- TODO swagger -->
+<!-- TODO Context -->
 - [GOLANG GUIDE](#golang-guide)
 	- [Basic](#basic)
 		- [Variables](#variables)
@@ -595,13 +595,13 @@ ch := make(chan int, 100)
 ```
 
 ##### Range and Close
-Sender can *close* a channel to notify that no more values will be sent, and receiver can  test whether a channel is close using a second variable.
+You can *close* a channel to notify that no more values will be sent it in it channel, and receiver can  test whether a channel is closed using a second variable.
 
 ```Go
 v, ok := <-ch
 
 ```
-ok if false if there are no more values to receive and the channel is closed.
+ok is false if there are no more values to receive and the channel is closed.
 
 you can loop a channel with *range* and receive its value with a variable in the right side.
 
@@ -631,13 +631,13 @@ default:
 
 #### Sync
 ##### Mutex
-Mutex its the way that you can ensure that a resource is access only for one goroutine at time. you can found a fully explanation [Here](https://tour.golang.org/concurrency/9)
+Mutex is the way that you can ensure that a resource is access only for one goroutine at time. you can found a fully explanation [Here](https://tour.golang.org/concurrency/9)
 
 
 
 ##### Wait Group
-Some times  we want wait that all threads launched finish its work to continue, for this cases exists WaitGroup of sync library. We will use three functionalities `Add`, `Done` and `Wait`
-Supposes that `Add` add a number to a count, `Done` subtracts one to the count and `Wait`  blocks the program until the count becomes 0.
+Some times  we want wait that all threads launched finish its work before continue, for this cases exists WaitGroup from sync library. We will use three functionalities `Add`, `Done` and `Wait`
+Supposes that `Add` add a number to a count, `Done` subtracts one to that count and `Wait`  blocks the program until the count becomes 0.
 ```Go
 package main
 
@@ -684,10 +684,10 @@ func worker(iteration, timeToSleep int, wg *sync.WaitGroup, end chan int) {
 	}
 }
 ```
-The above example can throw a panic because two works can do its job in the same time an both of them try to close the same channel. We going to see how solve this using the `context` library.
+The above example can throw a panic because two works can do its job in the same time an both of them are going to try to close the same channel. We are going to see how solve this using the `context` library.
 
 ### Web
-First we going to create a end point with the default go library, after it we will use another community library to do this more easy and quickly.
+First we are going to create an end point with the default go library, after it we will use another third-party library to do this more easy and quickly.
 #### Native
 In this section we will use net/http default library to build a end point 
 ##### Server
@@ -726,7 +726,7 @@ server.HandleFunc("/hello", hello)
 ```
 
 In this case the function `hello` will be called when a petition to /hello be do it. <br>
-`Note`:the filter for the method must be do it using the request parameter in the handle function.
+`Note`:the filter for the method must be do it using the request parameter in the handler function.
 
 ##### Listen and Serve
 
@@ -784,7 +784,7 @@ first we need to install it.
 go get -u github.com/labstack/echo/v4
 ```
 
-and for use it in our project we most import it.
+and for use it in our project we must import it.
 
 
 ```Go
@@ -799,7 +799,7 @@ server := echo.New()
 
 
 ##### Handler
-In echo a handler function receive an echo context and return an error, in this variable we have all that we need and  some others useful functions.
+In `Echo` a handler function receive an echo context and return an error, in this variable we have all that we need and  some others useful functions.
 
 ```Go
 func hello(c echo.Context) error {
@@ -807,7 +807,7 @@ func hello(c echo.Context) error {
 }
 ```
 
-In this case we write the "Hello Word" but if we want write a json we can do the next:
+In this case we wrote the "Hello Word" as string, but if we want write a json we can do the next:
 
 ``` Go
 func hello(c echo.Context) error {
@@ -823,8 +823,6 @@ func hello(c echo.Context) error {
 
 
 ##### Route
-
-
 Using the above server we can route our handler to a route
 
 ```Go
@@ -870,7 +868,7 @@ func hello(c echo.Context) error {
 
 ```
 #### Gin
-[Gin](https://gin-gonic.com/docs/) is another framework to do apis in Go, its works is very similar to `echo`. To install we run the command
+[Gin](https://gin-gonic.com/docs/) is another framework to do apis in Go, its works is very similar to `Echo`. To install we run the command
 ```sh
 go get -u  github.com/gin-gonic/gin
 ``` 
@@ -933,7 +931,7 @@ func hello(c *gin.Context) {
 
 ```
 ### Database Connection
-For database connection we need to use the driver for connection, for example, if we want connect to mysql database we install the driver like that 
+For database connection we need to use the driver for connection, for example, if we want connect to mysql database we must install the driver like that 
 ``` bash
 go get -u github.com/go-sql-driver/mysql
 ```
@@ -946,11 +944,12 @@ This function receives two parameters, the driver for the database and the URL f
 #### Query 
 We can make queries using the struct returned by `sql.Open` or using a query builder
 ##### Native
-We can prepare a `statement` to execute later with the function Prepare, with the symbol **?** we say that it is a parameter that will be passed later. the above function return a Statement struct that will be execute.
+We can prepare a `statement` to execute it later with the function Prepare, with the symbol **?** we say that it is a parameter that will be passed later. the above function return a Statement struct that will be execute.
 
 ```Go
 stmt, _ := db.Prepare("INSERT INTO projects values (?,?)")//id, name
-	res, err := stmt.Exec(0,
+	res, err := stmt.Exec(
+		0,
 		"testing",
 		)
 	if err != nil {
@@ -959,11 +958,11 @@ stmt, _ := db.Prepare("INSERT INTO projects values (?,?)")//id, name
 
 ```
 ##### Query Builder 
-We can [Goqu][goqu], first we must inst all it
-``` bash
+[Goqu][goqu] is a query builder that help us to make easier the query management, first we must install it
+``` sh
 go get -u github.com/doug-martin/goqu/v9
 ```
-now we need to said to `goqu` the dialect that we want andd  connect this query builder with our connection.
+now we need to said to `goqu` the dialect that we want and connect this query builder with our connection.
 ```Go
 import (
 
@@ -974,9 +973,9 @@ import (
 
 // look up the dialect
 dialect := goqu.Dialect("mysql")
-goquDb = dialect.DB(db)// pass the db connection did before
+goquDb = dialect.DB(db)// pass the db connection that we did before
 ```
-Now, for do query we can use our query builder to create queries
+Now, for do the query we can use our query builder
 ``` Go
 _, err := goquDb.Insert("projects").
 	Rows(&projectStruct).
@@ -1004,7 +1003,7 @@ func Sum(a, b int) (int, error) {
 }
 ```
 
-Now we want test the error returned and look if the sum is did right.
+Now we want test the error returned and look if the sum was did right.
 
 ```Go
 package main
@@ -1044,7 +1043,8 @@ func TestSumInvalidInput(t *testing.T) {
 		)
 	}
 }
-// For use the assert library we need install it running the command `go get -u github.com/stretchr/testify/assert`
+// For use the assert library we need install it running the command 
+// `go get -u github.com/stretchr/testify/assert`
 
 //Testing With assert a invalid input
 func TestSumInvalidInputAssert(t *testing.T) {
