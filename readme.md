@@ -3,7 +3,7 @@
 <img src="./gopher.png" width=10%></img>
 </p>
 
-This guide attempt to create a basic path of learning for go programming language. This guide is based in [A Tour Of Go][tour_guide_golang], it is a interactive guide in golang official web page.
+This guide is an attempt to create a basic path of learning for go programming language. This guide is based in [A Tour Of Go][tour_guide_golang], an interactive guide in golang official web page.
 
 In every explanation ,we will do some example or a link will be left that redirects to some another page to see better that topic.
 
@@ -89,7 +89,7 @@ var (
 variable4 := 0 // Is exactly the same than before but this way only can be used inside a function
 ```
 The `:=` operator make the initialization and declaration.<br>
-In `go` we must use the variables that we declared but in the case that we need declare a variable but don't use it we have the operator "_" it  says to compiler that we don't use it. It is useful in the case that you have a function that return two values but you only need one.<br>
+In `go` we must use the variables that we declared but in the case that we need to declare a variable but don't use it we have the operator "_" it  says to compiler that we don't use it. It is useful in the case that you have a function that return two values but you only need one.<br>
 *Example*
 ```Go
 a,_ := functionThatReturnTwoValues()
@@ -121,23 +121,23 @@ The operator `:=` only works with variables.
 
 
 ### Pointers
-In Go a pointer is a memory address of value. the type `*T` holds the memory address of a `T` data type. In a variable declaration de `*` define a pointer, in a pointer declared it gives us the value in that memory address. To get the memory address of a variable we use the operator `&` that return the pointer of that value. <br> 
+In Go a pointer is a memory address of value. the type `*T` holds the memory address of a `T` data type. In a variable declaration de `*` define a pointer, in a pointer declared it give's the value in that memory address. To get the memory address of a variable we use the operator `&` that return the pointer of that value. <br> 
 
 The zero value for pointers is ``nil``
 
 ```Go
 package main
 func main(){
-	var i * int //is a pointer, this means that I will holds the memory address of a int
+	var i * int //is a pointer, this means that `i` will holds the memory address of a int
 	var p = 43
-	i = &p //memory address that have I is the memory address of p
+	i = &p //memory address that have `i` is the memory address of p
 	*i= 12 // puts the 12 value in the memory address that i points
 	println(p) //print 12
 }
 ```
 [Example](https://tour.golang.org/moretypes/1).
 ### Type
-`type` keyword allow us define new data type like structs or alias for another existing types.
+`type` keyword allow us to define new data type like structs or alias for another existing types.
 #### Alias
 You can put an alias to another data types
 ```Go
@@ -180,15 +180,15 @@ type StructB struct{
 	Field3 string
 }
 ```
-Is not needed create a alias for a function but is recommended.
+Is not needed to create an alias for a function but is recommended.
 
 
 ##### Literals
-Literal is the way that we can declare and initialize a struct, [here](https://tour.golang.org/moretypes/5) is a explanation.
+Literal is the way that we can declare and initialize a struct, [here](https://tour.golang.org/moretypes/5) is an explanation.
 
 
 #### Interfaces
-The interfaces in Go define a set of methods, and any struct can implement it implementing the defined methods by the interface.
+The interfaces in Go define a set of methods, and any struct can implement it by implementing the defined methods by the interface.
 ```Go
 type ReadWritable interface {
 	Read() string, error
@@ -218,7 +218,7 @@ In the above example the struct `User` implements the interface `ReadWritable` b
  ```
 
 ### Functions
-A function in Go can return many values, an receive any parameters defined in it. For the definition of the function we use the keyword `func`, after this we put the name of the function.
+A function in Go can return many values, and receive any parameters defined in it. For the definition of the function we use the keyword `func`, after this we put the name of the function.
 ``` Go
  func nameOfFunction(param1 typeOfParam1, param2 typeOfParam2) returnedType1...{}
 ```
@@ -228,9 +228,10 @@ We can group the params and put its type to the end instead of the end of each o
 func nameOfFunction(param1, param2 typeOfParam1&2) 
 ```
 
-To return multiple values we put the return types before the body definition separated by commas and in parentheses, and in the function body, using the key word *return* we put the values separated by commas without parentheses.
+
+To return multiple values we put the return types in the sign separated by commas and in parentheses after params. To return the values in the function body we put the values separated by commas without parentheses after the keyword *return*.<br>
 To get the values from a function that return multiple values we declare a variables separated by commas.
-To see all this we going to do a example
+To see all this we going to do an example
 
 ``` Go
 func AddAndSubs(a, b int)(int, int){
@@ -242,7 +243,7 @@ a,b := AddAndSubs(4,1) // in this case a = 5 and b = 3
 [Example][tour_function_example]
 
 
-In a function you can receive undetermined number of variables using the **...** operator, also you can send a an array or slice using the same operator.
+In a function you can receive undetermined number of variables using the **...** operator, also you can send an array or slice using the same operator.
 
 
 ```Go
@@ -294,7 +295,7 @@ func main() {
 ```
 
 #### Error
-In Go exists a `error` data type, and it is used to handle errors in functions, usually this is the last value returned by the function if the function return an error. <br>
+In Go exists an `error` data type, and it is used to handle errors in functions, usually this is the last value returned by the function if the function return an error. <br>
 The way to handle this error data type is make a comparison to `nil` or to another error.
 ```Go
 package main
@@ -330,7 +331,7 @@ func main() {
 
 
 ### GOTO
-The `goto` keyword make that current flow goes to a specific tag, this is useful when we want break some flow and go to a specific place in our code
+The `goto` keyword make that current flow goes to a specific tag, this is useful when we want to break some flow and go to a specific place in our code
 
 
 ```Go
@@ -354,9 +355,9 @@ FINISHED: //finished TAG
 ```
 
 ### Panic
-In Go a `panic` happens when something went unexpectedly wrong unlike errors that are sended in an expected situation. we can throw a new panic `panic(string)`  but is not recommend because it breaks the app, and for the definition of panic.<br>
+In Go a `panic` happens when something went unexpectedly wrong, unlike errors that are sended in an expected situation. we can throw a new panic `panic(string)`  but it's not recommend because it breaks the app, and for the definition of panic.<br>
 
-Panic's breaks the normal flow of app and finish it if it is not handled.
+Panic's breaks the normal flow of app and finish it, if it is not handled.
 We can handle `panic` with the in-built function `recover()`  this function return an error with the panic message.
 
 ```Go
@@ -376,7 +377,7 @@ func main() {
 }
 
 func throwPanic() {
-	panic("new paniic")
+	panic("new panic")
 }
 ```
 
@@ -408,13 +409,13 @@ func main(){
 ```
 
 ### Packages
-All programs in go start running in package *main*.The  definition of package is made in the top the script. By convention, the package name is the same as the last element of the import path.
+All programs in go start running in package *main*. The  definition of package is made in the top of the script. By convention, the package name is the same as the last element of the import path.
 
 [Example][tour_package] <br>
 [Style Guide](https://rakyll.org/style-packages/) for go package
 
 ### Modules 
-Previously we must create or projects in the path that is declared in `GOPATH` or `GOROOT` environment variables, now we use go modules to create it in any place 
+Previously we must create our projects in the path that is declared in `GOPATH` or `GOROOT` environment variables, now we use go modules to create it in any place 
 ```sh
 go mod init example/user/hello
 ```
@@ -422,7 +423,7 @@ The above command create two files, `go.mod` and `go.sum`
 * go.mod: In this file are the dependencies and the current version of go used in the project. When we use ``go get ...`` that dependency is automatically added to `go.mod`. After running any package building command like `go build` for first time it will install all packages with the specific version.
 * go.sum: This file maintains the checksum of the dependencies, so when you run the project again it will no install all packages again, and if its dependencies change the checksum will return in an error.
 
-In order to keep our `go.mod` file update we have the command
+In order to keep our `go.mod` file updated we have the command
 ```sh
 go mod tidy
 ```
@@ -431,7 +432,7 @@ Another useful command is
 ```sh
 go mod vendor
 ```
-It create a vendor folder with all third-party dependencies and use this local dependencies instead download it.
+It create a vendor folder with all third-party dependencies and uses this local dependencies instead of download it.
 
 And another commonly used command is 
 ```sh
@@ -463,7 +464,7 @@ As with variables we can use the symbol `_` to say that it library won't be used
 
 
 ### Exports
-In Go, the way to say it that we want export some variable or function is made using the name of it, if the name begins with capital letter the resource will be exported, in other case doesn't
+In Go, the way to say that we want export some variable or function is made using the name of it, if the name begins with capital letter the resource will be exported, in other case doesn't
 
 
 ``` Go
@@ -474,13 +475,13 @@ func doSomething(){...} // is private
 ```
 
 ## Advance 
-In this section we going to view some advance and specific topics for go.
+In this section we're going to view some advance and specific topics for go.
 
 
 ### JSON
-Tp work with JSON we can use the json library that come by default with Go, and it is enough for almost all cases.
+To work with JSON we can use the json library that come by default with Go, and it is enough for almost all cases.
 
-First we need to create a struct with public fields and put a tag to each field, the tag tells to `json` library what is the name of the field when is decoded or encoded. If we don put a tag the name in encoding and decoding will be the same that the field.
+First we need to create a struct with public fields and put a tag to each field, the tag tells to `json` library what is the name of the field when is decoded or encoded. If we don't put tag, the name in encoding and decoding will be the same that the field.
 
 ```Go
 type Person struct {
@@ -548,17 +549,19 @@ go func(a int){
 }(4)
 ```
 
-In the above example we create a anonymous function and call it with four as its param, this function  going to run in a new goroutine because we use the keyword *go*.
+In the above example we create an anonymous function and call it with four as its param, this function is going to run in a new goroutine because we use the keyword *go*.
 
 #### Channels
-The way to communicate the goroutines in go is using channels. The chanel must be declared before its use and usually the declaration is did using the keyword *make*. This type of variable have two functions, receive and send values using the **<-** operator
+The way to communicate the goroutines in go is using channels. The chanel must be declared before its use and usually the declaration is done using the keyword *make*. This type of variable have two functions, receive and send values using the **<-** operator
 ```Go
 ch := make(chan int)
 ch <- v    // Send v to channel ch.
 r := <-ch  // Receive from ch, and
            // assign value to v.
 ```
-By default send and receive blocks until the other side is ready.
+By default send and receive blocks the app until the other side is ready. That means sending messages will block the app until the channel can receive messages.  
+
+
 ```Go
 package main
 
