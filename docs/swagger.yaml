@@ -10,17 +10,10 @@ info:
   contact: {}
 paths:
   /user/save:
-    post:
+    get:
       consumes:
       - application/json
       description: save sended user
-      parameters:
-      - description: user that will be saved
-        in: body
-        name: user
-        required: true
-        schema:
-          $ref: '#/definitions/main.User'
       produces:
       - application/json
       responses:

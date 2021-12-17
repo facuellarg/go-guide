@@ -24,7 +24,7 @@ var doc = `{
     "basePath": "{{.BasePath}}",
     "paths": {
         "/user/save": {
-            "post": {
+            "get": {
                 "description": "save sended user",
                 "consumes": [
                     "application/json"
@@ -33,17 +33,6 @@ var doc = `{
                     "application/json"
                 ],
                 "summary": "save user",
-                "parameters": [
-                    {
-                        "description": "user that will be saved",
-                        "name": "user",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/main.User"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "OK",

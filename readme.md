@@ -906,7 +906,7 @@ server.Get("/hello", hello)
 
 ##### Listen and Serve
 ```Go
-server.Run() //run in localhos
+server.Run() //run in localhost
 ```
 
 ##### Example
@@ -930,8 +930,6 @@ func hello(c *gin.Context) {
 		"cuellar",
 	})
 }
-
-
 ```
 ### Database Connection
 For database connection we need to use the driver for connection, for example, if we want connect to mysql database we must install the driver like that 
@@ -958,7 +956,6 @@ stmt, _ := db.Prepare("INSERT INTO projects values (?,?)")//id, name
 	if err != nil {
 		log.Print(err.Error()) // proper error handling instead of 
 	}
-
 ```
 ##### Query Builder 
 [Goqu][goqu] is a query builder that help us to make easier the query management, first we must install it
@@ -987,6 +984,7 @@ _, err := goquDb.Insert("projects").
 ```
 this return us an error for validations.<br>
 To read the documentation go to [Goqu][goqu]
+
 
 ### Testing
 We can test our functions in golang using the `testing` library, it allow us make unit test. By convention the test functions are named with the word Test followed by the name of the function that we want test, and the file is named as `file_name_test.go`. The test function always have the parameter `*testing.T`.<br>
@@ -1055,6 +1053,7 @@ func TestSumInvalidInputAssert(t *testing.T) {
 	var a, b int
 	want := ErrZeroInput
 	val, err := Sum(a, b)
+
 	assert.Equal(val, 0)
 	assert.ErrorIs(err, want)
 }
@@ -1064,7 +1063,9 @@ func TestSumAssert(t *testing.T) {
 	assert := assert.New(t)
 	var a, b int
 	a, b = 4, 3
+
 	val, err := Sum(a, b)
+
 	assert.Equal(val, 7)
 	assert.Nil(err)
 }
@@ -1087,7 +1088,7 @@ For all operations that we want to do with time the best way is using this libra
 This library help us with comparisons, aggregations and parsing.
 ```Go
 now := time.Now()
-now = now.Add(2 * *time.Hour) //add two hours to current time
+now = now.Add(2 * time.Hour) //add two hours to current time
 now = now.AddDate(0, 0, 1) //add one day to current data time
 now.Before(time.Now()) // compare if the data time is before that the time passed as param
 now.After(time.Now()) // compare if the data time is after that the time passed as param

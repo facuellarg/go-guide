@@ -14,7 +14,7 @@ func TestSum(t *testing.T) {
 			var a, b int
 			want := ErrZeroInput
 			val, err := Sum(a, b)
-			if !errors.Is(err, want) || val != 0 {
+			if !errors.Is(err, want) || val != 1 {
 				t.Fatalf(
 					"Sum(%d,%d) = %d,%v, want match with %d, %v",
 					a, b, val, err, 0, want,
@@ -36,14 +36,19 @@ func TestSumInvalidInput(t *testing.T) {
 	}
 }
 
+type Testing struct {
+	Name string
+	Age  int
+}
+
 //Testing With assert a invalid input
 func TestSumInvalidInputAssert(t *testing.T) {
 	assert := assert.New(t)
 	var a, b int
 	want := ErrZeroInput
 	val, err := Sum(a, b)
-	assert.Equal(val, 0)
-	assert.ErrorIs(err, want)
+	assert.Equal(1, val)
+	assert.ErrorIs(want, err)
 }
 
 //Answer that we want for normal input
