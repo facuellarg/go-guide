@@ -481,7 +481,7 @@ In this section we're going to view some advance and specific topics for go.
 
 ### Generics
 
-Since version 1.18 was added `generics` support in Golang. This allow us write functions, struct or methods that can be use a not certain type but a template for it.
+Since version 1.18 was added `generics` support in Golang. This allow us write functions, structs or methods that can be use as not a certain type but a template for it.
 
 This new syntax is composed in this way `[T any]` where `T` is the name of the type and `any` is the type itself. You could say that `T` is the alias for the type.
 
