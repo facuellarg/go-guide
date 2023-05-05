@@ -513,7 +513,11 @@ func main() {
 	var ms MyStruct[int] //ms := MyStrcut[int]{}
 	ms.SetVar(10)
 	myFunc[int](20) 
-	myFunc(10) // In some cases Go's compiler is capable to discover generic type without specification for instance in this call we didn't specified the type but it was inferred by the compiler
+	myFunc(10) 
+	// In some cases Go's compiler is capable to discover generic type without 
+	//specification for instance in this call we didn't specified the type but it was inferred by the
+	//compiler
+	
 }
 ```
 
