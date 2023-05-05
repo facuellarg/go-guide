@@ -521,7 +521,7 @@ func main() {
 }
 ```
 
-Those are the basics for `generics` but those have one extra functionalities.
+Those are the basics for `generics` but those have one extra functionality.
 
 #### Constrains
 
