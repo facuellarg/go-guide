@@ -32,6 +32,8 @@ In some cases the explanation in the official go tour is enough and for that rea
 		- [Imports](#imports)
 		- [Exports](#exports)
 	- [Advance](#advance)
+		- [Generics](#generics)
+			- [Constrains](#constrains)
 		- [JSON](#json)
 		- [Concurrency](#concurrency)
 			- [Go Routine](#go-routine)
@@ -477,8 +479,89 @@ func doSomething(){...} // is private
 ## Advance 
 In this section we're going to view some advance and specific topics for go.
 
+### Generics
+
+Since version 1.18 was added `generics` support in Golang. This allow us write functions, struct or methods that can be use a not certain type but a template for it.
+
+This new syntax is composed in this way `[T any]` where `T` is the name of the type and `any` is the type itself. You could say that `T` is the alias for the type.
+
+```Go
+//Definitions
+type MyStruct[T any] struct {
+	variable T
+}
+
+// function
+func myFunc[T any](a T) {
+	fmt.Printf("value of a %v\n", a)
+}
+
+func TwoTypes[T any,K any](a T, b K){
+	println(a)
+	println(b)
+}
+
+
+// method
+func (ms *MyStruct[T]) SetVar(a T) {
+	ms.variable = a
+}
+
+//usage
+func main() {
+	// you can define the variable as you want just like another variable 
+	var ms MyStruct[int] //ms := MyStrcut[int]{}
+	ms.SetVar(10)
+	myFunc[int](20) 
+	myFunc(10) // In some cases Go's compiler is capable to discover generic type without specification for instance in this call we didn't specified the type but it was inferred by the compiler
+}
+```
+
+Those are the basics for `generics` but those have one extra functionalities.
+
+#### Constrains
+
+Suppose that you want define a `generic` function but just for a certain types, not all of them, some types that share something in common, for example they can be compared, or they are numbers.
+
+```Go
+//define a custom constraint to use generics
+type Number64 interface {
+	int64 |float64
+}
+
+func Add[T Number64](a,b T)T{
+	return a+b 
+}
+
+//usage 
+
+Add[int64](10,30)//here the [int64] is needless but we write it to be explicit
+```
+
+In the above example e defined the `Number64` constraint that limit our possibilities to the types defined on it, `int64` and `float64` in this case. Additionally you can use the symbol `~` to include not just the type but the types that derived by them
+
+```Go
+type Number64 interface {
+	~int64 |~float64
+}
+
+type MyNum int64
+
+func Add[T Number64](a,b T)T{
+	return a+b 
+}
+
+var a,b MyNum
+a = 10
+b = 20
+Add[MyNum](a,b) //here the [MyNum] is needless but we write it to be explicit
+
+```
+
+This is a powerful tool to do a lot of different implementations without repeating code, for example create a new map with generic types or a data structure that is not dependent of a concrete type.
 
 ### JSON
+
 To work with JSON we can use the json library that come by default with Go, and it is enough for almost all cases.
 
 First we need to create a struct with public fields and put a tag to each field, the tag tells to `json` library what is the name of the field when is decoded or encoded. If we don't put tag, the name in encoding and decoding will be the same that the field.
